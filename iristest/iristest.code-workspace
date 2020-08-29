@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"objectscript.conn": {
+			"active": true,
+			"host": "127.0.0.1",
+			"port": 6003,
+			"username": "_SYSTEM",
+			"password": "Roche",
+			"ns": "USER",
+			"https": false
+		  }
+		  
+	}
+}

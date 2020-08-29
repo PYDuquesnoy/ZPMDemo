@@ -1,0 +1,57 @@
+version: '3.7'
+services:
+  registry:
+    hostname: registry
+    init: true
+    image: intersystemsdc/iris-community:2020.2.0.204.0-zpm
+    restart: always
+    environment:
+      - ISC_DATA_DIRECTORY=/dur/config
+      #This merges the cpf with our password hash 
+      - ISC_CPF_MERGE_FILE=/irisdev/app/iris.cpf
+    ports: 
+      - "6001:52773"
+      - "5001:51773"
+    volumes:
+      - ./registry:/irisdev/app
+      - configregistry:/dur
+    #password is in cpf, Key is not needed for community instance    
+    #command: --password-file /irisdev/app/password.txt --key /irisdev/app/irislicense/iris.key
+  iriscode:
+    hostname: iriscode
+    init: true
+    image: intersystemsdc/iris-community:2020.2.0.204.0-zpm
+    restart: always
+    environment:
+      - ISC_DATA_DIRECTORY=/dur/config
+      #This merges the cpf with our password hash 
+      - ISC_CPF_MERGE_FILE=/irisdev/app/iris.cpf
+    ports: 
+      - "6002:52773"
+      - "5002:51773"
+    volumes:
+      - ./iriscode:/irisdev/app
+      - configcode:/dur
+    #password is in cpf, Key is not needed for community instance    
+    #command: --password-file /irisdev/app/password.txt --key /irisdev/app/irislicense/iris.key
+  iristest:
+    hostname: iristest
+    init: true
+    image: intersystemsdc/iris-community:2020.2.0.204.0-zpm
+    restart: always
+    environment:
+      - ISC_DATA_DIRECTORY=/dur/config
+      #This merges the cpf with our password hash 
+      - ISC_CPF_MERGE_FILE=/irisdev/app/iris.cpf
+    ports: 
+      - "6003:52773"
+      - "5003:51773"
+    volumes:
+      - ./iristest:/irisdev/app
+      - configtest:/dur
+      #password is in cpf, Key is not needed for community instance    
+      #command: --password-file /irisdev/app/password.txt --key /irisdev/app/irislicense/iris.key
+volumes:
+  configcode: ~
+  configregistry: ~
+  configtest: ~
